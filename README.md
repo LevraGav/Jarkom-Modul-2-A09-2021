@@ -279,7 +279,7 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
 ![image](https://user-images.githubusercontent.com/72689610/139526596-c615b6f3-e88b-4329-969b-02c795775f0c.png)
 
 # --- No 8 ---
-Konfigurasi Webserver dengan domain www.franky.c08.com dan DocumentRoot pada /var/www/franky.A09.com.
+Konfigurasi Webserver dengan domain www.franky.A09.com dan DocumentRoot pada /var/www/franky.A09.com.
 
 ### Langkah Penyelesaian : 
 1. Pada Skypie, pindah ke direktori `/etc/apache2/sites-available` lalu copy file **000-default.conf** ke **franky.A09.com.conf** dengan perintah
@@ -289,12 +289,12 @@ Konfigurasi Webserver dengan domain www.franky.c08.com dan DocumentRoot pada /va
 2. Edit file **franky.A09.com.conf** sehingga menjadi 
 ![image](https://user-images.githubusercontent.com/36225278/139530010-3e9bbaa4-5b72-446a-942d-c3bb147da559.png)
 
-3. Aktifkan konfigurasi `a2ensite franky.c08.com.conf`
+3. Aktifkan konfigurasi `a2ensite franky.A09.com.conf`
 4. Pindah ke direktori `/var/www` lalu download file dengan command `git config --global http.sslVerify false` lalu `git clone https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom.git` dan unzip file
 ![image](https://user-images.githubusercontent.com/36225278/139530029-7aa6fd56-40c0-4e95-abd0-395b5373fe7d.png)
 
 5. Restart apache dengan `service apache2 restart`
-6. Ketika mengakses www.franky.c08.com atau www.franky.c08.com/index.php/home maka akan mendapat tampilan seperti berikut
+6. Ketika mengakses www.franky.A09.com atau www.franky.A09.com/index.php/home maka akan mendapat tampilan seperti berikut
 ![image](https://user-images.githubusercontent.com/36225278/139530038-8e4e5105-90a2-44a9-836f-6abe5abb9a78.png)
 
 
@@ -310,7 +310,7 @@ Mengubah url www.franky.A09.com/index.php/home dapat menjadi menjadi www.franky.
       AllowOverride All
    </Directory>
    ```
-   pada **franky.c08.com.conf** seperti berikut
+   pada **franky.A09.com.conf** seperti berikut
    ![image](https://user-images.githubusercontent.com/36225278/139530242-defa4f6a-b85a-4b8a-aa56-d06f6a4118ce.png)
    
 3. Pindah ke direktori `/var/www/franky.A09.com` dan buat file **.htaccess** lalu masukkan
@@ -418,7 +418,7 @@ Memberi autentikasi pada www.general.mecha.franky.A09.com dengan username **luff
    `htpasswd -c /etc/apache2/.htpasswd luffy`
    
 3. Akan diminta memasukan password, masukkan **onepiece**
-4. Ketika web server general.mecha.franky.c08.com diakses, akan diminta authentikasi username dan password
+4. Ketika web server general.mecha.franky.A09.com diakses, akan diminta authentikasi username dan password
 
 # --- No 16 --- 
 Setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.A09.com
