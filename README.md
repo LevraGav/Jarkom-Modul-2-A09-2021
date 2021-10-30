@@ -390,7 +390,7 @@ Mengatur web www.general.mecha.franky.A09.com hanya bisa diakses dengan port 150
      ![image](https://user-images.githubusercontent.com/36225278/139531766-57eeedde-24d8-4d85-a327-d1cd2cbc68ff.png)
 
 2. Tambahkan port yang akan di listen pada /etc/apache2/ports.conf
-   ` ``
+   ```
    Listen 15000
    Listen 15500
    ```
