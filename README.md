@@ -1,5 +1,5 @@
 # Jarkom-Modul-2-A09-2021
-Laporan Resmi Praktikum Jarkom Modul 2
+Laporan Resmi Praktikum Jarkom Modul 2 untuk kelompok A09.
 
 # Anggota Kelompok
 Anggota  | NRP
