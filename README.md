@@ -446,9 +446,11 @@ Mengganti request gambar yang memiliki substring**franky** akan diarahkan menuju
 2. Ketika mengakses image yang memiliki substring **franky**, akan langsung redirect ke http://www.super.franky.A09.com/public/images/franky.png
 
 ## Kendala Pengerjaan
-- Saat dijalankan, terkadang output tidak keluar
-- Terkadang virtual box tidak bisa dibuka
+- Wifi yang menolak untuk dihubungkan ke virtual box menyebabkan masalah selama beberapa hari.
+- Output terkadang aneh dan terdapat warning pada output
+- Terkadang virtual box tidak bisa dibuka pada beberapa member
 - Penggunaan script.sh yang masih membingungkan di awalnya, sehingga harus mengulang dari awal, karena belum terbiasa
+- Waktu yang sangat singkat untuk membuat praktikum ditambah bertabrakan dengan ets
 
 
 
