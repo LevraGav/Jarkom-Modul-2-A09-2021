@@ -303,14 +303,13 @@ Mengubah url www.franky.A09.com/index.php/home dapat menjadi menjadi www.franky.
 
 ### Langkah Penyelesaian : 
 1. Jalankan perintah a2enmod rewrite
-2. Melakukan konfigurasi pada server dengan menambahkan
+2. Melakukan konfigurasi pada server dengan menambahkan pada **franky.A09.com.conf** 
    ```
    <Directory /var/www/franky.A09.com>
       Options +FollowSymLinks -Multiviews
       AllowOverride All
    </Directory>
    ```
-   pada **franky.A09.com.conf** seperti berikut
    ![image](https://user-images.githubusercontent.com/36225278/139530242-defa4f6a-b85a-4b8a-aa56-d06f6a4118ce.png)
    
 3. Pindah ke direktori `/var/www/franky.A09.com` dan buat file **.htaccess** lalu masukkan
