@@ -279,117 +279,164 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
 ![image](https://user-images.githubusercontent.com/72689610/139526596-c615b6f3-e88b-4329-969b-02c795775f0c.png)
 
 # --- No 8 ---
-Cari paket yang menunjukan pengambilan file dari FTP tersebut!
+Konfigurasi Webserver dengan domain www.franky.c08.com dan DocumentRoot pada /var/www/franky.A09.com.
 
 ### Langkah Penyelesaian : 
-- Membuka file yang telah didownload dari drive (8-10)
-- Menjalankan command `ftp-data.command==RETR` pada display filter
-- Tidak muncul list packet apapun
-![image](https://user-images.githubusercontent.com/72689610/134615449-ef430ba4-f7d5-4bfc-aa29-070ecac22f06.png)
+1. Pada Skypie, pindah ke direktori `/etc/apache2/sites-available` lalu copy file **000-default.conf** ke **franky.A09.com.conf** dengan perintah
+   `cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.A09.com.conf`
+2. Edit file **franky.A09.com.conf** sehingga menjadi 
+![image](https://user-images.githubusercontent.com/36225278/139530010-3e9bbaa4-5b72-446a-942d-c3bb147da559.png)
+
+3. Aktifkan konfigurasi `a2ensite franky.c08.com.conf`
+4. Pindah ke direktori `/var/www` lalu download file dengan command `git config --global http.sslVerify false` lalu `git clone https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom.git` dan unzip file
+![image](https://user-images.githubusercontent.com/36225278/139530029-7aa6fd56-40c0-4e95-abd0-395b5373fe7d.png)
+
+5. Restart apache dengan `service apache2 restart`
+6. Ketika mengakses www.franky.c08.com atau www.franky.c08.com/index.php/home maka akan mendapat tampilan seperti berikut
+![image](https://user-images.githubusercontent.com/36225278/139530038-8e4e5105-90a2-44a9-836f-6abe5abb9a78.png)
+
 
 # --- No 9 ---
-Cari paket-paket yang menuju FTP terdapat inidkasi penyimpanan beberapa file. Salah satunya adalah sebuah file berisi data rahasia dengan nama "secret.zip". Simpan dan buka file tersebut!
+Mengubah url www.franky.A09.com/index.php/home dapat menjadi menjadi www.franky.A09.com/home
 
 ### Langkah Penyelesaian : 
-- Buka File yang ada pada Drive (8-10)
--	Mengisi display filter dengan `ftp-data.command contains “secret.zip” `
-![soal9a](https://user-images.githubusercontent.com/73924235/134495308-37954fbb-b986-474d-bb72-a9d3ab0d784c.png)
--	Memilih follow dan follow TCP
-![soal9b](https://user-images.githubusercontent.com/73924235/134495323-231862f6-0754-43e1-9883-6c5665d8d910.png)
--	Kemudian terlihat data yang masih ASCII, diganti menjadi raw
-![soal9c](https://user-images.githubusercontent.com/73924235/134495340-8b42127e-0b23-41a3-a1f4-e30d65c327bc.png)
--	Lalu melakukan Save As dengan nama secret.zip
-![soal9d](https://user-images.githubusercontent.com/73924235/134495387-90141451-90d1-4113-8036-4a2015f81bfd.png)
--	Kemudian membuka Folder berisi Wanted.pdf, namun belum bisa dibuka karena memiliki password
-![soal9e](https://user-images.githubusercontent.com/73924235/134495398-cbc2d07c-0753-4461-bc83-75ff403bdfb7.png)
-
+1. Jalankan perintah a2enmod rewrite
+2. Melakukan konfigurasi pada server dengan menambahkan
+   `
+   <Directory /var/www/franky.A09.com>
+      Options +FollowSymLinks -Multiviews
+      AllowOverride All
+   </Directory>
+   `
+   pada **franky.c08.com.conf** seperti berikut
+   ![image](https://user-images.githubusercontent.com/36225278/139530242-defa4f6a-b85a-4b8a-aa56-d06f6a4118ce.png)
+   
+3. Pindah ke direktori `/var/www/franky.A09.com` dan buat file **.htaccess** lalu masukkan
+   `RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^home$ index.php/home
+    `
+4. Restart apache dengan `service apache2 restart`
+5. Ketika mengakses www.franky.A09.com/home maka akan mendapat tampilan seperti berikut
+![image](https://user-images.githubusercontent.com/36225278/139530038-8e4e5105-90a2-44a9-836f-6abe5abb9a78.png)
+    
 # --- No 10 --- 
-Selain itu terdapat "history.txt" yang kemungkinan berisi history bash server tersebut! Gunakan isi dari "history.txt" untuk menemukan password untuk membuka file rahasia yang ada di "secret.zip"!
+Konfigurasi subdomain www.super.franky.A09.com Setelah itu, pada subdomain www.super.franky.A09.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.A09.com.
 
 ### Langkah Penyelesaian : 
--	Buka File yang ada pada Drive (8-10)
--	Mengisi display filter dengan `ftp-data.command contains “history.txt”`
-![soal10a](https://user-images.githubusercontent.com/73924235/134495482-4160e7ce-84a6-46bd-90da-d782ed36d3d4.png)
+1. Edit file **super.franky.A09.com.conf** sehingga menjadi
+![image](https://user-images.githubusercontent.com/36225278/139530672-a210e485-9c57-490b-a5bd-260eefce4760.png)
 
--	Memilih follow dan follow TCP
- ![soal10b](https://user-images.githubusercontent.com/73924235/134495514-e77d24b3-267e-4c72-8f5b-ccf5dea56330.png)
-
--	Kemudian terlihat data yang menunjukan bahwa password (key) ada pada file bukanapaapa.txt dari tail-1 (yaitu 1 dari yang paling bawah)
- ![soal10c](https://user-images.githubusercontent.com/73924235/134495528-d335ccb8-2ea4-430f-a902-fba2badb0115.png)
-
--	Mengisi display filter lagi dengan ftp-data.command contains “bukanapaapa.txt”
- ![soal10d](https://user-images.githubusercontent.com/73924235/134495547-ace13651-282d-42d4-b1f7-f772f514e399.png)
-
--	Kemudian melakukan follow TCP lagi
- ![soal10e](https://user-images.githubusercontent.com/73924235/134495563-ee65f051-8b93-4d4c-90ac-9c16e60f3a20.png)
-
--	Terlihat password untuk Wanted.pdf yaitu d1b1langbukanapaapajugagapercaya
- ![soal10f](https://user-images.githubusercontent.com/73924235/134495573-fc36dd2e-6e26-42e0-9cab-5b5fa99d9d46.png)
-
--	Memasukan password ke wanted.pdf.
-![soal10g](https://user-images.githubusercontent.com/73924235/134495603-11783db4-7b98-400e-91ce-e850967bbf4f.png)
+2. Restart apache dengan `service apache2 restart`
+3. Ketika mengakses www.super.franky.A09.com maka akan mendapat tampilan seperti berikut
+![image](https://user-images.githubusercontent.com/36225278/139530821-aaf34422-9f11-4c93-b7d4-cb6c4e4b2a35.png)
 
 # --- No 11 --- 
-Filter sehingga wireshark hanya mengambil paket yang berasal dari port 80!
+Akan tetapi, pada folder /public hanya dapat melakukan directory listing saja.
 
-### Langkah Penyelesaian :
-- Mengisi capture filter dengan "src port 80" kemudian enter
-![image](https://user-images.githubusercontent.com/72689610/134629218-62fc01c3-f740-4cc1-9ecc-fa54c00750a3.png)
+1. Konfigurasi file **super.franky.A09.com.conf** dengan menambahkan
+   ` 
+   <Directory /var/www/super.franky.A09.com/public>
+       Options +Indexes
+   </Directory>
+   `
+   sehingga menjadi 
+   ![image](https://user-images.githubusercontent.com/36225278/139530984-2f0c3179-fe63-4a8a-98c1-de2f2a23a286.png)
 
-- Membuka wireshark kembali, namun kali ini memilih `WIFI`
-- Mengisi capture filter dengan "src port 80" kemudian enter
-- Kemudian buka sebuah website, kali ini kami menggunakan website `http://monta.if.its.ac.id/index.php/progres/tugasakhir`
-- Maka di wireshark akan muncul sebagai berikut :
-![image](https://user-images.githubusercontent.com/72689610/134629869-4ffa8691-367b-4579-aa97-ad8ee3e71388.png)
+2. Ketika mengakses www.super.franky.A09.com/public maka akan mendapat tampilan seperti berikut
+![image](https://user-images.githubusercontent.com/36225278/139531082-39435ddd-3a85-4ae3-ba01-9e8f1e34937c.png)
 
 # --- No 12 --- 
-Filter sehingga wireshark hanya mengambil paket yang mengandung port 21!
+Mengganti error default dari apache menjadi error file 404.html pada folder/error.
 
 ### Langkah Penyelesaian :
-- Mengisi Capture Filter dengan `port 21` pada Adapter for Loopback Traffic
-![soal12a](https://user-images.githubusercontent.com/73924235/134495705-648736d6-9354-45e8-aebc-7c2d11fae484.png)
-- Hasil Kosong, karena port 21 harus menggunakan FTP yang bisa diakses melalui filezilla
-![soal12b](https://user-images.githubusercontent.com/73924235/134495753-49286cf9-422e-43fe-af40-032200e1e0ed.png)
-- Ketika XAMPP dinyalakan dan Filezilla diconnect maka akan menghasilkan hasil berikut
-![soal12c](https://user-images.githubusercontent.com/73924235/134642277-6e7a9cf6-aaf7-4ae9-98b9-a69d7546dee8.JPG)
+1. Menambahkan konfigurasi berikut pada **suoer.franky.A09.com.conf**
+   `ErrorDocument 404 /error/404.html`
+   Sehingga menjadi
+   ![image](https://user-images.githubusercontent.com/36225278/139531160-2d792071-fac5-4896-a814-37ca859bdb51.png)
+
+2. Ketika mengakses url invalid seperti www.super.franky.A09.com/hai maka akan mendapat tampilan seperti berikut
+   ![image](https://user-images.githubusercontent.com/36225278/139531212-e9f78f14-8e23-4956-926b-e70acae270ba.png)
 
 # --- No 13 --- 
-Filter sehingga wireshark hanya menampilkan paket yang menuju port 443!
+Konfigurasi virtual host agar dapat mengakses file asset www.super.franky.A09.com/public/js menjadi www.super.franky.A09.com/js.
 
 ### Langkah Penyelesaian :
-- Mengisi capture filter dengan `dst port 443` kemudian enter
-![image](https://user-images.githubusercontent.com/72689610/134630498-2dc8b4cd-9b90-444d-9e64-37394adc1cd2.png)
+1. Jika mengakses www.super.franky.A09.com/public/js maka mendapatkan tampilan sebagai berikut
+   ![image](https://user-images.githubusercontent.com/36225278/139531302-81a456be-0362-42e0-852b-4d46f5b54674.png)
+2. Edit file **super.franky.A09.com.conf** dengan menambahkan
+   `Alias "/js" "/var/www/super.franky.A09.com/public/js"`
+   sehinggan menjadi
+   ![image](https://user-images.githubusercontent.com/36225278/139531444-5c1d9492-155b-48a1-867d-365fc2081799.png)
 
-- Membuka wireshark kembali, namun kali ini memilih `WIFI`
-- Mengisi capture filter dengan `dst port 443` kemudian enter
-![image](https://user-images.githubusercontent.com/72689610/134630498-2dc8b4cd-9b90-444d-9e64-37394adc1cd2.png)
-
-- Kemudian buka sebuah website, kali ini kami menggunakan website `http://monta.if.its.ac.id/index.php/progres/tugasakhir`
-- Maka di wireshark akan muncul sebagai berikut :
-![image](https://user-images.githubusercontent.com/72689610/134630813-acf1189e-b1ca-47a2-83d8-990101ce3e54.png)
+   Ketika mengakses www.super.franky.A09.com/js maka akan mendapatkan tampilan seperti berikut
+   ![image](https://user-images.githubusercontent.com/36225278/139531487-69bcabbe-fe53-432d-90d6-8f41e629b082.png)
 
 # --- No 14 --- 
-Filter sehingga wireshark hanya mengambil paket yang tujuannya ke kemenag.go.id!
+Mengatur web www.general.mecha.franky.A09.com hanya bisa diakses dengan port 15000 dan port 15500
 
 ### Langkah Penyelesaian :
-- Mengisi capture filter dengan `dst host kemenag.go.id` kemudian enter
-![image](https://user-images.githubusercontent.com/72689610/134632321-a70faa64-3571-42a2-8bf3-430370c82568.png)
+1. Membuat konfigurasi Web Server di /etc/apache2/sites-available/general.mecha.franky.A09.com.conf, tambahkan potongan kode berikut.
+   `<VirtualHost *:15000 *:15500>
+        ServerName general.mecha.franky.A09.com
+        ServerAlias www.general.mecha.franky.A09.com
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/general.mecha.franky.A09.com
+     </VirtualHost>
+     `
+     ![image](https://user-images.githubusercontent.com/36225278/139531766-57eeedde-24d8-4d85-a327-d1cd2cbc68ff.png)
 
-- Membuka website `https://www.kemenag.go.id/`
-![image](https://user-images.githubusercontent.com/72689610/134631528-9a25d2b3-15af-4a4f-ad09-6eabbf1f4138.png)
+2. Tambahkan port yang akan di listen pada /etc/apache2/ports.conf
+   ` Listen 15000
+     Listen 15500`
+![image](https://user-images.githubusercontent.com/36225278/139531859-edd92fa6-fdfc-4502-8ca3-11abe20eabac.png)
+
+3. Buat folder baru di /var/www dengan nama general.mecha.franky.A09.com
+   `mkdir /var/www/general.mecha.franky.A09.com`
+   
+4. Copy file - file lampiran github ke folder yang telah dibuat
+   `cp -R /root/general.mecha.franky/* /var/www/general.mecha.franky.A09.com`
+   
+5. Restart apache2 dengan `service apache2 restart`
+
+6. general.mecha.franky.A09.com dan Alias nya sudah bisa diakses melalui client menggunakan Lynx pada port 15000 atau 15500
 
 # --- No 15 --- 
-Filter sehingga wireshark hanya mengambil paket yang berasal dari ip kalian!
+Memberi autentikasi pada www.general.mecha.franky.A09.com dengan username **luffy** dan password **onepiece**
 
 ### Langkah Penyelesaian :
-- Mencari ip dengan membuka `command prompt` dan mengetikkan `ipconfig`
-![image](https://user-images.githubusercontent.com/72689610/134631809-fd0fadf9-76bc-4a57-912b-90181c97378c.png)
+1. Tambahkan code berikut pada file /etc/apache2/sites-available/general.mecha.franky.A09.com.conf di bagian web server general.mecha.franky.A09.com
+   ![image](https://user-images.githubusercontent.com/36225278/139532054-05d94aec-7856-416b-9787-02ccbd5acffa.png)
 
-- Membuka wireshark dan mengisi capture filter dengan `src host 192.168.1.4`
-![image](https://user-images.githubusercontent.com/72689610/134632067-f600b66c-4d91-4ef6-bccd-136176b2bf66.png)
+2. Buat user baru dengan command berikut sehingga memunculkan file **.htpasswd** pada direktori /etc/apache2
+   `htpasswd -c /etc/apache2/.htpasswd luffy`
+   
+3. Akan diminta memasukan password, masukkan **onepiece**
+4. Ketika web server general.mecha.franky.c08.com diakses, akan diminta authentikasi username dan password
 
-- Output :
-![image](https://user-images.githubusercontent.com/72689610/134632169-5379cc0b-6cf3-4632-a5ec-af7d3735c261.png)
+# --- No 16 --- 
+Setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.A09.com
+
+### Langkah Penyelesaian :
+1. Tambahkan file .htaccess pada folder /var/www/html, lalu isikan berikut
+   `RewriteEngine On
+    RewriteBase /
+    RewriteCond %{HTTP_HOST} ^10\.18\.2\.4$
+    RewriteRule ^(.*)$ http://www.franky.A09.com/$1 [L,R=301]
+    `
+ 
+2. Ketika mengakses ip Skypie (192.173.2.4), akan langsung redirect ke http://www.franky.A09.com
+
+# --- No 15 --- 
+Mengganti request gambar yang memiliki substring**franky** akan diarahkan menuju **franky.png** ketika mengakses www.super.franky.A09.com
+
+### Langkah Penyelesaian :
+1. Tambahkan code berikut pada file .htaccess pada folder /var/www/general.mecha.franky.A09.com, lalu isikan berikut
+   `RewriteEngine On
+    RewriteRule ^(.*)franky(.*)$ http://www.super.franky.A09.com/public/images/franky.png [L,R=301]
+    `
+    
+2. Ketika mengakses image yang memiliki substring **franky**, akan langsung redirect ke http://www.super.franky.A09.com/public/images/franky.png
 
 ## Kendala Pengerjaan
 - Saat dijalankan, terkadang output tidak keluar
