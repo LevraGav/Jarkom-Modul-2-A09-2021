@@ -283,7 +283,9 @@ Konfigurasi Webserver dengan domain www.franky.c08.com dan DocumentRoot pada /va
 
 ### Langkah Penyelesaian : 
 1. Pada Skypie, pindah ke direktori `/etc/apache2/sites-available` lalu copy file **000-default.conf** ke **franky.A09.com.conf** dengan perintah
-   `cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.A09.com.conf`
+   `
+   cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.A09.com.conf
+   `
 2. Edit file **franky.A09.com.conf** sehingga menjadi 
 ![image](https://user-images.githubusercontent.com/36225278/139530010-3e9bbaa4-5b72-446a-942d-c3bb147da559.png)
 
@@ -302,20 +304,21 @@ Mengubah url www.franky.A09.com/index.php/home dapat menjadi menjadi www.franky.
 ### Langkah Penyelesaian : 
 1. Jalankan perintah a2enmod rewrite
 2. Melakukan konfigurasi pada server dengan menambahkan
-   `
+   ```
    <Directory /var/www/franky.A09.com>
       Options +FollowSymLinks -Multiviews
       AllowOverride All
    </Directory>
-   `
+   ```
    pada **franky.c08.com.conf** seperti berikut
    ![image](https://user-images.githubusercontent.com/36225278/139530242-defa4f6a-b85a-4b8a-aa56-d06f6a4118ce.png)
    
 3. Pindah ke direktori `/var/www/franky.A09.com` dan buat file **.htaccess** lalu masukkan
-   `RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^home$ index.php/home
-    `
+   ```
+   RewriteEngine On
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule ^home$ index.php/home
+    ```
 4. Restart apache dengan `service apache2 restart`
 5. Ketika mengakses www.franky.A09.com/home maka akan mendapat tampilan seperti berikut
 ![image](https://user-images.githubusercontent.com/36225278/139530038-8e4e5105-90a2-44a9-836f-6abe5abb9a78.png)
@@ -335,11 +338,11 @@ Konfigurasi subdomain www.super.franky.A09.com Setelah itu, pada subdomain www.s
 Akan tetapi, pada folder /public hanya dapat melakukan directory listing saja.
 
 1. Konfigurasi file **super.franky.A09.com.conf** dengan menambahkan
-   ` 
+   ``` 
    <Directory /var/www/super.franky.A09.com/public>
        Options +Indexes
    </Directory>
-   `
+   ```
    sehingga menjadi 
    ![image](https://user-images.githubusercontent.com/36225278/139530984-2f0c3179-fe63-4a8a-98c1-de2f2a23a286.png)
 
@@ -377,18 +380,21 @@ Mengatur web www.general.mecha.franky.A09.com hanya bisa diakses dengan port 150
 
 ### Langkah Penyelesaian :
 1. Membuat konfigurasi Web Server di /etc/apache2/sites-available/general.mecha.franky.A09.com.conf, tambahkan potongan kode berikut.
-   `<VirtualHost *:15000 *:15500>
+   ```
+   <VirtualHost *:15000 *:15500>
         ServerName general.mecha.franky.A09.com
         ServerAlias www.general.mecha.franky.A09.com
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/general.mecha.franky.A09.com
-     </VirtualHost>
-     `
+    </VirtualHost>
+    ```
      ![image](https://user-images.githubusercontent.com/36225278/139531766-57eeedde-24d8-4d85-a327-d1cd2cbc68ff.png)
 
 2. Tambahkan port yang akan di listen pada /etc/apache2/ports.conf
-   ` Listen 15000
-     Listen 15500`
+   ` ``
+   Listen 15000
+   Listen 15500
+   ```
 ![image](https://user-images.githubusercontent.com/36225278/139531859-edd92fa6-fdfc-4502-8ca3-11abe20eabac.png)
 
 3. Buat folder baru di /var/www dengan nama general.mecha.franky.A09.com
@@ -419,27 +425,31 @@ Setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.A09
 
 ### Langkah Penyelesaian :
 1. Tambahkan file .htaccess pada folder /var/www/html, lalu isikan berikut
-   `RewriteEngine On
-    RewriteBase /
-    RewriteCond %{HTTP_HOST} ^10\.18\.2\.4$
-    RewriteRule ^(.*)$ http://www.franky.A09.com/$1 [L,R=301]
-    `
+   ```
+   RewriteEngine On
+   RewriteBase /
+   RewriteCond %{HTTP_HOST} ^192\.173\.2\.4$
+   RewriteRule ^(.*)$ http://www.franky.A09.com/$1 [L,R=301]
+   ```
  
 2. Ketika mengakses ip Skypie (192.173.2.4), akan langsung redirect ke http://www.franky.A09.com
 
-# --- No 15 --- 
+# --- No 17 --- 
 Mengganti request gambar yang memiliki substring**franky** akan diarahkan menuju **franky.png** ketika mengakses www.super.franky.A09.com
 
 ### Langkah Penyelesaian :
 1. Tambahkan code berikut pada file .htaccess pada folder /var/www/general.mecha.franky.A09.com, lalu isikan berikut
-   `RewriteEngine On
-    RewriteRule ^(.*)franky(.*)$ http://www.super.franky.A09.com/public/images/franky.png [L,R=301]
-    `
+   ```
+   RewriteEngine On
+   RewriteRule ^(.*)franky(.*)$ http://www.super.franky.A09.com/public/images/franky.png [L,R=301]
+   ```
     
 2. Ketika mengakses image yang memiliki substring **franky**, akan langsung redirect ke http://www.super.franky.A09.com/public/images/franky.png
 
 ## Kendala Pengerjaan
 - Saat dijalankan, terkadang output tidak keluar
+- Terkadang virtual box tidak bisa dibuka
+- Penggunaan script.sh yang masih membingungkan di awalnya, sehingga harus mengulang dari awal, karena belum terbiasa
 
 
 
