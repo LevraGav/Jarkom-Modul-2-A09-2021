@@ -8,7 +8,7 @@ Arvel Gavrilla Raissananda | 05111940000040
 Johnivan Aldo Sudiono | 05111940000051
 Vincent Yonathan | 05111940000186
 
-## Link-link
+## Soal Jarkom-Modul-2 2021
 - [Soal](https://docs.google.com/document/d/11_xDG1yHMIOAZVPksRV0VDwx8S4KIgtAMCLh3UD5-qM/edit)
 
 ## Pengantar
